@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rehoof Marketing Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0c0c;
+    --surface: #141414;
+    --surface2: #1c1c1c;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #f0ede8;
+    --muted: #7a7672;
+    --accent: #e8c87a;
+    --accent2: #c9a84c;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(12,12,12,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 13px; font-weight: 400; color: var(--muted);
+    text-decoration: none; transition: color 0.2s; letter-spacing: 0.3px;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: 160px 40px 100px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border: 1px solid rgba(232,200,122,0.3);
+    border-radius: 20px; margin-bottom: 32px;
+    font-size: 12px; font-weight: 500; color: var(--accent);
+    letter-spacing: 0.8px; text-transform: uppercase;
+  }
+  .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  h1 em { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-size: 17px; color: var(--muted); max-width: 520px;
+    margin: 0 auto 48px; font-weight: 300; line-height: 1.7;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px;
+    background: var(--accent); color: #0c0c0c;
+    font-size: 14px; font-weight: 600; border-radius: var(--radius-sm);
+    text-decoration: none; transition: all 0.2s; border: none; cursor: pointer;
+    letter-spacing: 0.2px;
+  }
+  .hero-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  .brand-strip {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; flex-wrap: wrap;
+    padding: 60px 40px 80px;
+    border-bottom: 1px solid var(--border);
+    max-width: 800px; margin: 0 auto;
+  }
+  .brand-pill {
+    padding: 6px 14px; border: 1px solid var(--border2);
+    border-radius: 20px; font-size: 12px; color: var(--muted);
+    font-weight: 400; white-space: nowrap;
+  }
+  .strip-label { font-size: 12px; color: var(--muted); margin-right: 8px; opacity: 0.6; letter-spacing: 0.5px; text-transform: uppercase; }
+
+  /* APP SECTION */
+  #app {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  .section-label {
+    font-size: 11px; font-weight: 500; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px; line-height: 1.2; margin-bottom: 40px;
+    letter-spacing: -0.5px;
+  }
+
+  /* TABS */
+  .tabs-wrapper {
+    display: flex; gap: 2px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 4px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 110px; padding: 10px 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 400;
+    color: var(--muted); background: transparent;
+    border: none; border-radius: var(--radius-sm);
+    cursor: pointer; transition: all 0.2s; text-align: center;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: var(--surface2);
+    color: var(--text); font-weight: 500;
+    border: 1px solid var(--border2);
+  }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* BRAND CARDS */
+  .brand-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    margin-bottom: 24px;
+  }
+  .brand-card {
+    padding: 14px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    cursor: pointer; transition: all 0.2s;
+    background: var(--surface);
+  }
+  .brand-card:hover { border-color: var(--border2); }
+  .brand-card.selected {
+    border-color: var(--accent);
+    background: rgba(232,200,122,0.05);
+  }
+  .brand-dot { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 10px; }
+  .brand-card-name { font-size: 12px; font-weight: 500; color: var(--text); line-height: 1.3; }
+  .brand-card-type { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* FORM ELEMENTS */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label.field-label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+
+  select, textarea, input[type="text"] {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7672' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer; }
+  select:focus, textarea:focus, input[type="text"]:focus { border-color: rgba(232,200,122,0.5); }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  select option { background: #1c1c1c; }
+
+  .gen-btn {
+    width: 100%; padding: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 600;
+    background: var(--accent); color: #0c0c0c;
+    border: none; border-radius: var(--radius-sm);
+    cursor: pointer; margin-top: 8px; transition: all 0.2s;
+    letter-spacing: 0.2px;
+  }
+  .gen-btn:hover { background: var(--accent2); }
+  .gen-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* OUTPUT */
+  .output-box {
+    margin-top: 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: none;
+  }
+  .output-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .output-head-label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+  .copy-btn {
+    font-size: 12px; color: var(--muted);
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 12px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { color: var(--text); border-color: var(--border2); }
+
+  .output-body { padding: 20px; }
+  .output-text { font-size: 14px; color: var(--text); line-height: 1.75; white-space: pre-wrap; }
+  .output-text.loading { color: var(--muted); font-style: italic; }
+
+  .variants-list { display: flex; flex-direction: column; gap: 12px; }
+  .variant-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 16px;
+  }
+  .variant-num { font-size: 11px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .variant-text { font-size: 14px; color: var(--text); line-height: 1.75; }
+
+  .hashtag-cloud { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; }
+  .hashtag-pill { font-size: 13px; padding: 5px 12px; border-radius: 20px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .seo-section { border-top: 1px solid var(--border); padding-top: 4px; }
+  .seo-label { padding: 10px 16px 4px; font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+
+  /* INFO BOX */
+  .info-box {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px; background: var(--surface);
+    border-radius: var(--radius-sm); border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .info-icon { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+  .info-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px;
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--muted); }
+  footer strong { color: var(--text); font-weight: 500; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 20px 60px; }
+    #app { padding: 60px 20px 80px; }
+    .brand-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .form-row.triple { grid-template-columns: 1fr 1fr; }
+    .brand-strip { padding: 40px 20px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.6s ease both; }
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero > *:nth-child(4) { animation-delay: 0.4s; }
+
+  /* subtle grid bg */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: -1;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Rehoof <span>Studio</span></div>
+  <div style="display:flex;align-items:center;gap:20px;">
+    <div class="nav-links">
+      <a href="#app">Captions</a>
+      <a href="#app">Hashtags</a>
+      <a href="#app">Campaign</a>
+      <a href="#app">Brief</a>
+      <a href="#app">Images</a>
+    </div>
+    <button onclick="showKeyModal()" style="font-family:'DM Sans',sans-serif;font-size:12px;padding:6px 14px;background:transparent;border:1px solid var(--border2);border-radius:6px;color:var(--muted);cursor:pointer;white-space:nowrap;" title="Set API Key">
+      <span id="key-status">Set API key</span>
+    </button>
+  </div>
+</nav>
+
+<!-- API KEY MODAL -->
+<div id="key-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+  <div style="background:#141414;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:36px;max-width:490px;width:90%;position:relative;">
+    <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:8px;color:#f0ede8;">Enter your free API key</div>
+    <div style="display:inline-block;background:rgba(46,204,142,0.12);border:1px solid rgba(46,204,142,0.3);border-radius:6px;padding:4px 12px;font-size:11px;color:#2ecc8e;font-weight:500;margin-bottom:16px;letter-spacing:0.4px;">FREE &mdash; Works in Maldives &mdash; No credit card</div>
+    <p style="font-size:13px;color:#7a7672;line-height:1.8;margin-bottom:6px;">This app uses <strong style="color:#f0ede8;">Groq AI</strong> — free, fast, and works from the Maldives.</p>
+    <div style="background:#1c1c1c;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px;margin-bottom:20px;">
+      <div style="font-size:12px;font-weight:500;color:#e8c87a;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px;">Get your free key in 2 minutes</div>
+      <div style="font-size:13px;color:#7a7672;line-height:2.2;">
+        <span style="color:#f0ede8;font-weight:500;">1.</span> Go to <a href="https://console.groq.com/keys" target="_blank" style="color:#e8c87a;">console.groq.com/keys</a><br>
+        <span style="color:#f0ede8;font-weight:500;">2.</span> Sign up free with Google or email<br>
+        <span style="color:#f0ede8;font-weight:500;">3.</span> Click <strong style="color:#f0ede8;">"Create API key"</strong><br>
+        <span style="color:#f0ede8;font-weight:500;">4.</span> Copy &amp; paste it below
+      </div>
+    </div>
+    <label style="font-size:11px;font-weight:500;color:#7a7672;text-transform:uppercase;letter-spacing:0.6px;display:block;margin-bottom:6px;">Groq API Key</label>
+    <input id="key-input" type="password" placeholder="gsk_..." style="width:100%;font-family:'DM Sans',sans-serif;font-size:13px;color:#f0ede8;background:#1c1c1c;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;outline:none;margin-bottom:8px;">
+    <div id="key-error" style="font-size:12px;color:#e05252;min-height:18px;margin-bottom:14px;"></div>
+    <button onclick="saveKey()" style="width:100%;padding:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;background:#e8c87a;color:#0c0c0c;border:none;border-radius:8px;cursor:pointer;">Save &amp; start generating</button>
+    <p style="font-size:11px;color:#7a7672;text-align:center;margin-top:14px;">Stored only in your browser. Never shared.</p>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-badge"><div class="hero-badge-dot"></div> AI-Powered Marketing</div>
+  <h1>Your brands.<br><em>Your voice.</em> Amplified.</h1>
+  <p class="hero-sub">A private marketing suite for all six Rehoof brands — captions, hashtags, campaign plans, design briefs, and AI image prompts, generated in seconds.</p>
+  <a href="#app" class="hero-cta">Open the suite &darr;</a>
+</section>
+
+<div class="brand-strip">
+  <span class="strip-label">Brands</span>
+  <span class="brand-pill">Manhattan Fish Market</span>
+  <span class="brand-pill">New York Steak Shack</span>
+  <span class="brand-pill">Scoozi Pizzeria Italiana</span>
+  <span class="brand-pill">Manhattan Business Hotel</span>
+  <span class="brand-pill">Unique Seafood</span>
+  <span class="brand-pill">Silver Catering</span>
+</div>
+
+<section id="app">
+  <div class="section-label">Marketing Tools</div>
+  <div class="section-title">What do you need today?</div>
+
+  <div class="tabs-wrapper">
+    <button class="tab-btn active" onclick="switchTab('captions', this)">Captions</button>
+    <button class="tab-btn" onclick="switchTab('hashtags', this)">Hashtags & SEO</button>
+    <button class="tab-btn" onclick="switchTab('campaign', this)">Campaign Plan</button>
+    <button class="tab-btn" onclick="switchTab('brief', this)">Design Brief</button>
+    <button class="tab-btn" onclick="switchTab('imageprompt', this)">Image Prompts</button>
+  </div>
+
+  <!-- CAPTIONS -->
+  <div class="tab-panel active" id="panel-captions">
+    <div class="brand-grid" id="brands-captions">
+      <div class="brand-card selected" data-brand="Manhattan Fish Market" onclick="selectBrand(this,'brands-captions')"><div class="brand-dot" style="background:#3b9eff"></div><div class="brand-card-name">Manhattan Fish Market</div><div class="brand-card-type">Seafood restaurant</div></div>
+      <div class="brand-card" data-brand="New York Steak Shack" onclick="selectBrand(this,'brands-captions')"><div class="brand-dot" style="background:#e05252"></div><div class="brand-card-name">New York Steak Shack</div><div class="brand-card-type">Steakhouse</div></div>
+      <div class="brand-card" data-brand="Scoozi Pizzeria Italiana" onclick="selectBrand(this,'brands-captions')"><div class="brand-dot" style="background:#e8923a"></div><div class="brand-card-name">Scoozi Pizzeria</div><div class="brand-card-type">Italian restaurant</div></div>
+      <div class="brand-card" data-brand="Manhattan Business Hotel" onclick="selectBrand(this,'brands-captions')"><div class="brand-dot" style="background:#8899aa"></div><div class="brand-card-name">Manhattan Business Hotel</div><div class="brand-card-type">4-star hotel</div></div>
+      <div class="brand-card" data-brand="Unique Seafood" onclick="selectBrand(this,'brands-captions')"><div class="brand-dot" style="background:#2ecc8e"></div><div class="brand-card-name">Unique Seafood</div><div class="brand-card-type">Resort supplier</div></div>
+      <div class="brand-card" data-brand="Silver Catering" onclick="selectBrand(this,'brands-captions')"><div class="brand-dot" style="background:#9b9b9b"></div><div class="brand-card-name">Silver Catering</div><div class="brand-card-type">Catering service</div></div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">Platform</label>
+        <select id="c-platform"><option>Instagram</option><option>Facebook</option><option>LinkedIn</option><option>Twitter / X</option></select></div>
+      <div class="form-group"><label class="field-label">Caption type</label>
+        <select id="c-type"><option>Product highlight</option><option>Seasonal / Eid</option><option>Event promotion</option><option>Behind the scenes</option><option>Customer engagement</option><option>Announcement</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group full"><label class="field-label">What is this post about?</label>
+        <textarea id="c-topic" placeholder="e.g. Freshly caught Maldivian yellowfin tuna, grilled with garlic butter and herbs — new on the menu this week."></textarea></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">Tone</label>
+        <select id="c-tone"><option>Warm & inviting</option><option>Bold & punchy</option><option>Elegant & refined</option><option>Playful & fun</option><option>Professional</option></select></div>
+      <div class="form-group"><label class="field-label">Variants</label>
+        <select id="c-variants"><option value="1">1 caption</option><option value="3" selected>3 variants</option><option value="5">5 variants</option></select></div>
+    </div>
+    <button class="gen-btn" onclick="generateCaptions()">Generate captions</button>
+
+    <div class="output-box" id="out-captions">
+      <div class="output-head"><span class="output-head-label">Generated captions</span><button class="copy-btn" onclick="copyEl('res-captions')">Copy all</button></div>
+      <div class="output-body"><div class="variants-list" id="res-captions"></div></div>
+    </div>
+  </div>
+
+  <!-- HASHTAGS -->
+  <div class="tab-panel" id="panel-hashtags">
+    <div class="brand-grid" id="brands-hashtags">
+      <div class="brand-card selected" data-brand="Manhattan Fish Market" onclick="selectBrand(this,'brands-hashtags')"><div class="brand-dot" style="background:#3b9eff"></div><div class="brand-card-name">Manhattan Fish Market</div><div class="brand-card-type">Seafood restaurant</div></div>
+      <div class="brand-card" data-brand="New York Steak Shack" onclick="selectBrand(this,'brands-hashtags')"><div class="brand-dot" style="background:#e05252"></div><div class="brand-card-name">New York Steak Shack</div><div class="brand-card-type">Steakhouse</div></div>
+      <div class="brand-card" data-brand="Scoozi Pizzeria Italiana" onclick="selectBrand(this,'brands-hashtags')"><div class="brand-dot" style="background:#e8923a"></div><div class="brand-card-name">Scoozi Pizzeria</div><div class="brand-card-type">Italian restaurant</div></div>
+      <div class="brand-card" data-brand="Manhattan Business Hotel" onclick="selectBrand(this,'brands-hashtags')"><div class="brand-dot" style="background:#8899aa"></div><div class="brand-card-name">Manhattan Business Hotel</div><div class="brand-card-type">4-star hotel</div></div>
+      <div class="brand-card" data-brand="Unique Seafood" onclick="selectBrand(this,'brands-hashtags')"><div class="brand-dot" style="background:#2ecc8e"></div><div class="brand-card-name">Unique Seafood</div><div class="brand-card-type">Resort supplier</div></div>
+      <div class="brand-card" data-brand="Silver Catering" onclick="selectBrand(this,'brands-hashtags')"><div class="brand-dot" style="background:#9b9b9b"></div><div class="brand-card-name">Silver Catering</div><div class="brand-card-type">Catering service</div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">Topic / subject</label><input type="text" id="h-topic" placeholder="e.g. grilled lobster, Eid offer, staycation"></div>
+      <div class="form-group"><label class="field-label">Platform</label><select id="h-platform"><option>Instagram</option><option>Facebook</option><option>LinkedIn</option></select></div>
+    </div>
+    <div class="form-row triple">
+      <div class="form-group"><label class="field-label">Mix</label><select id="h-mix"><option>Balanced</option><option>Broad reach</option><option>Niche / targeted</option><option>Local Maldives</option></select></div>
+      <div class="form-group"><label class="field-label">Count</label><select id="h-count"><option value="10">10</option><option value="15" selected>15</option><option value="20">20</option><option value="30">30</option></select></div>
+      <div class="form-group"><label class="field-label">Include SEO keywords</label><select id="h-seo"><option value="yes">Yes</option><option value="no">No</option></select></div>
+    </div>
+    <button class="gen-btn" onclick="generateHashtags()">Generate hashtags & keywords</button>
+
+    <div class="output-box" id="out-hashtags">
+      <div class="output-head"><span class="output-head-label">Hashtags</span><button class="copy-btn" onclick="copyHashtags()">Copy</button></div>
+      <div class="hashtag-cloud" id="res-hashtags"></div>
+      <div class="seo-section" id="seo-box" style="display:none;">
+        <div class="seo-label">SEO Keywords</div>
+        <div class="hashtag-cloud" id="res-seo"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAMPAIGN -->
+  <div class="tab-panel" id="panel-campaign">
+    <div class="info-box"><div class="info-icon"></div><div class="info-text">Generate a complete campaign concept — theme, messaging pillars, post schedule, and copy angles for your brand.</div></div>
+    <div class="brand-grid" id="brands-campaign">
+      <div class="brand-card selected" data-brand="Manhattan Fish Market" onclick="selectBrand(this,'brands-campaign')"><div class="brand-dot" style="background:#3b9eff"></div><div class="brand-card-name">Manhattan Fish Market</div><div class="brand-card-type">Seafood restaurant</div></div>
+      <div class="brand-card" data-brand="New York Steak Shack" onclick="selectBrand(this,'brands-campaign')"><div class="brand-dot" style="background:#e05252"></div><div class="brand-card-name">New York Steak Shack</div><div class="brand-card-type">Steakhouse</div></div>
+      <div class="brand-card" data-brand="Scoozi Pizzeria Italiana" onclick="selectBrand(this,'brands-campaign')"><div class="brand-dot" style="background:#e8923a"></div><div class="brand-card-name">Scoozi Pizzeria</div><div class="brand-card-type">Italian restaurant</div></div>
+      <div class="brand-card" data-brand="Manhattan Business Hotel" onclick="selectBrand(this,'brands-campaign')"><div class="brand-dot" style="background:#8899aa"></div><div class="brand-card-name">Manhattan Business Hotel</div><div class="brand-card-type">4-star hotel</div></div>
+      <div class="brand-card" data-brand="Unique Seafood" onclick="selectBrand(this,'brands-campaign')"><div class="brand-dot" style="background:#2ecc8e"></div><div class="brand-card-name">Unique Seafood</div><div class="brand-card-type">Resort supplier</div></div>
+      <div class="brand-card" data-brand="Silver Catering" onclick="selectBrand(this,'brands-campaign')"><div class="brand-dot" style="background:#9b9b9b"></div><div class="brand-card-name">Silver Catering</div><div class="brand-card-type">Catering service</div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">Occasion</label>
+        <select id="ca-occasion"><option>Eid al-Fitr</option><option>Eid al-Adha</option><option>Ramadan</option><option>New Year</option><option>Valentine's Day</option><option>Brand anniversary</option><option>Product launch</option><option>Seasonal menu</option><option>Custom</option></select></div>
+      <div class="form-group"><label class="field-label">Duration</label>
+        <select id="ca-duration"><option>1 week (7 posts)</option><option>2 weeks (10 posts)</option><option>1 month (15 posts)</option></select></div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px;"><label class="field-label">Campaign goal / key message (optional)</label>
+      <textarea id="ca-goal" placeholder="e.g. Drive dine-in footfall during Eid. No discounts — focus on experience and atmosphere." style="min-height:70px;"></textarea></div>
+    <button class="gen-btn" onclick="generateCampaign()">Generate campaign plan</button>
+
+    <div class="output-box" id="out-campaign">
+      <div class="output-head"><span class="output-head-label">Campaign plan</span><button class="copy-btn" onclick="copyText('res-campaign')">Copy</button></div>
+      <div class="output-body"><div class="output-text" id="res-campaign"></div></div>
+    </div>
+  </div>
+
+  <!-- BRIEF -->
+  <div class="tab-panel" id="panel-brief">
+    <div class="info-box"><div class="info-icon"></div><div class="info-text">Generate a ready-to-send design brief for your graphic designer or content creator.</div></div>
+    <div class="brand-grid" id="brands-brief">
+      <div class="brand-card selected" data-brand="Manhattan Fish Market" onclick="selectBrand(this,'brands-brief')"><div class="brand-dot" style="background:#3b9eff"></div><div class="brand-card-name">Manhattan Fish Market</div><div class="brand-card-type">Seafood restaurant</div></div>
+      <div class="brand-card" data-brand="New York Steak Shack" onclick="selectBrand(this,'brands-brief')"><div class="brand-dot" style="background:#e05252"></div><div class="brand-card-name">New York Steak Shack</div><div class="brand-card-type">Steakhouse</div></div>
+      <div class="brand-card" data-brand="Scoozi Pizzeria Italiana" onclick="selectBrand(this,'brands-brief')"><div class="brand-dot" style="background:#e8923a"></div><div class="brand-card-name">Scoozi Pizzeria</div><div class="brand-card-type">Italian restaurant</div></div>
+      <div class="brand-card" data-brand="Manhattan Business Hotel" onclick="selectBrand(this,'brands-brief')"><div class="brand-dot" style="background:#8899aa"></div><div class="brand-card-name">Manhattan Business Hotel</div><div class="brand-card-type">4-star hotel</div></div>
+      <div class="brand-card" data-brand="Unique Seafood" onclick="selectBrand(this,'brands-brief')"><div class="brand-dot" style="background:#2ecc8e"></div><div class="brand-card-name">Unique Seafood</div><div class="brand-card-type">Resort supplier</div></div>
+      <div class="brand-card" data-brand="Silver Catering" onclick="selectBrand(this,'brands-brief')"><div class="brand-dot" style="background:#9b9b9b"></div><div class="brand-card-name">Silver Catering</div><div class="brand-card-type">Catering service</div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">Post format</label>
+        <select id="b-format"><option>Single image post</option><option>Carousel (3-5 slides)</option><option>Reel / short video</option><option>Story</option><option>Promotional banner</option></select></div>
+      <div class="form-group"><label class="field-label">Platform</label>
+        <select id="b-platform"><option>Instagram</option><option>Facebook</option><option>Both Instagram & Facebook</option></select></div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px;"><label class="field-label">What should the post show / communicate?</label>
+      <textarea id="b-topic" placeholder="e.g. New Eid menu for 2025. Show the full spread — mezze, grills, seafood. Warm, celebratory atmosphere."></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">Mood / visual style</label>
+        <select id="b-mood"><option>Warm & celebratory</option><option>Clean & minimal</option><option>Dark & moody</option><option>Bright & fresh</option><option>Rustic & natural</option><option>Luxury & premium</option></select></div>
+      <div class="form-group"><label class="field-label">Text overlay on image</label>
+        <select id="b-textoverlay"><option>Yes — headline + subtext</option><option>Minimal — just a tagline</option><option>No text on image</option></select></div>
+    </div>
+    <button class="gen-btn" onclick="generateBrief()">Generate design brief</button>
+
+    <div class="output-box" id="out-brief">
+      <div class="output-head"><span class="output-head-label">Design brief</span><button class="copy-btn" onclick="copyText('res-brief')">Copy</button></div>
+      <div class="output-body"><div class="output-text" id="res-brief"></div></div>
+    </div>
+  </div>
+  <!-- IMAGE PROMPTS -->
+  <div class="tab-panel" id="panel-imageprompt">
+    <div class="info-box"><div class="info-icon"></div><div class="info-text">Generate ready-to-use AI image prompts for Midjourney, DALL·E, Firefly, or Canva AI — plus a reference image search prompt to find visual inspiration.</div></div>
+
+    <div class="brand-grid" id="brands-imageprompt">
+      <div class="brand-card selected" data-brand="Manhattan Fish Market" onclick="selectBrand(this,'brands-imageprompt')"><div class="brand-dot" style="background:#3b9eff"></div><div class="brand-card-name">Manhattan Fish Market</div><div class="brand-card-type">Seafood restaurant</div></div>
+      <div class="brand-card" data-brand="New York Steak Shack" onclick="selectBrand(this,'brands-imageprompt')"><div class="brand-dot" style="background:#e05252"></div><div class="brand-card-name">New York Steak Shack</div><div class="brand-card-type">Steakhouse</div></div>
+      <div class="brand-card" data-brand="Scoozi Pizzeria Italiana" onclick="selectBrand(this,'brands-imageprompt')"><div class="brand-dot" style="background:#e8923a"></div><div class="brand-card-name">Scoozi Pizzeria</div><div class="brand-card-type">Italian restaurant</div></div>
+      <div class="brand-card" data-brand="Manhattan Business Hotel" onclick="selectBrand(this,'brands-imageprompt')"><div class="brand-dot" style="background:#8899aa"></div><div class="brand-card-name">Manhattan Business Hotel</div><div class="brand-card-type">4-star hotel</div></div>
+      <div class="brand-card" data-brand="Unique Seafood" onclick="selectBrand(this,'brands-imageprompt')"><div class="brand-dot" style="background:#2ecc8e"></div><div class="brand-card-name">Unique Seafood</div><div class="brand-card-type">Resort supplier</div></div>
+      <div class="brand-card" data-brand="Silver Catering" onclick="selectBrand(this,'brands-imageprompt')"><div class="brand-dot" style="background:#9b9b9b"></div><div class="brand-card-name">Silver Catering</div><div class="brand-card-type">Catering service</div></div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full"><label class="field-label">What do you want the image to show?</label>
+        <textarea id="ip-subject" placeholder="e.g. A whole grilled Maldivian lobster on a rustic wooden board, lemon wedges, fresh herbs, ocean in the background"></textarea></div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">AI image tool</label>
+        <select id="ip-tool">
+          <option>Midjourney</option>
+          <option>DALL·E 3</option>
+          <option>Adobe Firefly</option>
+          <option>Canva AI</option>
+          <option>Stable Diffusion</option>
+          <option>Generic (works anywhere)</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="field-label">Image purpose</label>
+        <select id="ip-purpose">
+          <option>Instagram feed post</option>
+          <option>Instagram story</option>
+          <option>Facebook post</option>
+          <option>Menu visual</option>
+          <option>Website hero image</option>
+          <option>Promotional banner</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row triple">
+      <div class="form-group"><label class="field-label">Visual style</label>
+        <select id="ip-style">
+          <option>Photorealistic</option>
+          <option>Cinematic / editorial</option>
+          <option>Moody & dark</option>
+          <option>Bright & airy</option>
+          <option>Flat lay / overhead</option>
+          <option>Lifestyle / candid</option>
+          <option>Luxury / high-end</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="field-label">Aspect ratio</label>
+        <select id="ip-ratio">
+          <option value="1:1">1:1 — Square (Instagram)</option>
+          <option value="4:5">4:5 — Portrait (Instagram)</option>
+          <option value="9:16">9:16 — Story / Reel</option>
+          <option value="16:9">16:9 — Landscape / Banner</option>
+          <option value="3:2">3:2 — Standard photo</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="field-label">Prompts to generate</label>
+        <select id="ip-count">
+          <option value="1">1 prompt</option>
+          <option value="3" selected>3 variations</option>
+          <option value="5">5 variations</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group"><label class="field-label">Lighting preference</label>
+        <select id="ip-lighting">
+          <option>Natural golden hour</option>
+          <option>Soft studio light</option>
+          <option>Dramatic side light</option>
+          <option>Bright & even</option>
+          <option>Candlelit / warm glow</option>
+          <option>No preference</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="field-label">Include reference prompt</label>
+        <select id="ip-ref">
+          <option value="yes">Yes — generate reference search terms</option>
+          <option value="no">No — image prompt only</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="gen-btn" onclick="generateImagePrompts()">Generate image prompts</button>
+
+    <div class="output-box" id="out-imageprompt">
+      <div class="output-head"><span class="output-head-label">AI image prompts</span><button class="copy-btn" onclick="copyEl('res-imageprompt')">Copy all</button></div>
+      <div class="output-body">
+        <div class="variants-list" id="res-imageprompt"></div>
+      </div>
+      <div id="ref-section" style="display:none; border-top: 1px solid var(--border);">
+        <div class="output-head" style="border-top:none;">
+          <span class="output-head-label">Reference image search terms</span>
+          <button class="copy-btn" onclick="copyText('res-reference')">Copy</button>
+        </div>
+        <div class="output-body">
+          <div class="ref-intro" style="font-size:12px; color:var(--muted); margin-bottom:12px;">Use these on Pinterest, Unsplash, Behance, or Google Images to find visual references before shooting or generating.</div>
+          <div class="hashtag-cloud" id="res-reference-pills"></div>
+          <div class="output-text" id="res-reference" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>Built for <strong>Rehoof Brands</strong> &mdash; Malé, Maldives &nbsp;&middot;&nbsp; Powered by Claude AI</p>
+</footer>
+
+<script>
+const BRAND_VOICES = {
+  "Manhattan Fish Market": "casual, ocean-fresh, fun and approachable, celebrates fresh seafood, food-forward language, no fine dining stuffiness",
+  "New York Steak Shack": "bold, confident, NYC attitude, meat-lover energy, celebrates quality cuts and bold flavors",
+  "Scoozi Pizzeria Italiana": "warm Italian hospitality, passionate about food, rustic charm, celebrates la dolce vita and authentic Italian flavors",
+  "Manhattan Business Hotel": "professional yet welcoming, 4-star polish, blend of business and leisure, highlights comfort and Maldives setting",
+  "Unique Seafood": "B2B resort supplier tone, educational, authoritative on seafood quality, trusted supply partner — NOT a restaurant",
+  "Silver Catering": "elegant, event-focused, reliable, celebrates milestone moments, professional catering excellence"
+};
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+function selectBrand(el, groupId) {
+  document.querySelectorAll('#' + groupId + ' .brand-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function getBrand(groupId) {
+  const s = document.querySelector('#' + groupId + ' .brand-card.selected');
+  return s ? s.dataset.brand : 'Manhattan Fish Market';
+}
+
+function getApiKey() {
+  return localStorage.getItem('rms_groq_key') || '';
+}
+
+async function callClaude(prompt) {
+  const key = getApiKey();
+  if (!key) { showKeyModal(); throw new Error('No API key'); }
+  let res, data;
+  try {
+    res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + key
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        max_tokens: 1500,
+        temperature: 0.8,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+  } catch(e) {
+    throw new Error('Network error — make sure you are connected to the internet.');
+  }
+  try { data = await res.json(); } catch(e) { throw new Error('Could not parse response (status ' + res.status + ')'); }
+  if (!res.ok) {
+    const msg = data?.error?.message || ('API error ' + res.status);
+    if (res.status === 401) { showKeyModal('Invalid API key — please re-enter your Groq key.'); }
+    throw new Error(msg);
+  }
+  return data?.choices?.[0]?.message?.content || '';
+}
+
+function showKeyModal(errMsg) {
+  document.getElementById('key-modal').style.display = 'flex';
+  if (errMsg) document.getElementById('key-error').textContent = errMsg;
+}
+
+function saveKey() {
+  const val = document.getElementById('key-input').value.trim();
+  if (!val || val.length < 10) {
+    document.getElementById('key-error').textContent = 'Please enter a valid Groq API key (starts with gsk_).';
+    return;
+  }
+  localStorage.setItem('rms_groq_key', val);
+  document.getElementById('key-modal').style.display = 'none';
+  document.getElementById('key-error').textContent = '';
+  document.getElementById('key-status').textContent = 'API key saved ✓';
+  document.getElementById('key-status').style.color = '#2ecc8e';
+}
+
+function clearKey() {
+  localStorage.removeItem('rms_groq_key');
+  document.getElementById('key-status').textContent = 'No API key set';
+  document.getElementById('key-status').style.color = 'var(--muted)';
+  showKeyModal();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const k = getApiKey();
+  if (!k) {
+    showKeyModal();
+  } else {
+    document.getElementById('key-status').textContent = 'API key saved ✓';
+    document.getElementById('key-status').style.color = '#2ecc8e';
+  }
+});
+
+async function generateCaptions() {
+  const brand = getBrand('brands-captions');
+  const topic = document.getElementById('c-topic').value.trim();
+  if (!topic) { alert('Please describe what this post is about.'); return; }
+  const platform = document.getElementById('c-platform').value;
+  const type = document.getElementById('c-type').value;
+  const tone = document.getElementById('c-tone').value;
+  const variants = document.getElementById('c-variants').value;
+
+  const btn = document.querySelector('#panel-captions .gen-btn');
+  btn.disabled = true; btn.textContent = 'Writing captions...';
+
+  const outBox = document.getElementById('out-captions');
+  const result = document.getElementById('res-captions');
+  outBox.style.display = 'block';
+  result.innerHTML = '<div class="variant-card"><div class="variant-text" style="color:var(--muted);font-style:italic;">Generating your captions...</div></div>';
+
+  const prompt = `You are a social media copywriter for ${brand} based in the Maldives.
+Brand voice: ${BRAND_VOICES[brand]}.
+Platform: ${platform}. Post type: ${type}. Tone: ${tone}.
+Topic: ${topic}
+
+Write ${variants} distinct caption variant(s). Each must:
+- Open with a completely different hook — no two captions can start similarly
+- Be platform-optimized for ${platform}
+- Sound human and natural — not AI-generated
+- End with a soft CTA (no discounts or giveaways)
+- No excessive emoji
+
+Format exactly as:
+VARIANT 1:
+[caption text]
+
+VARIANT 2:
+[caption text]
+
+Output only the captions, nothing else.`;
+
+  try {
+    const text = await callClaude(prompt);
+    const parts = text.split(/VARIANT \d+:/g).filter(s => s.trim());
+    if (parts.length === 0) {
+      result.innerHTML = `<div class="variant-card"><div class="variant-text">${text.trim()}</div></div>`;
+    } else {
+      result.innerHTML = parts.map((p, i) => `
+        <div class="variant-card">
+          <div class="variant-num">Variant ${i + 1}</div>
+          <div class="variant-text">${p.trim()}</div>
+        </div>`).join('');
+    }
+  } catch(e) {
+    if (e.message !== 'No API key') result.innerHTML = `<div class="variant-card"><div class="variant-text" style="color:#e05252;">Error: ${e.message}</div></div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Generate captions';
+}
+
+async function generateHashtags() {
+  const brand = getBrand('brands-hashtags');
+  const topic = document.getElementById('h-topic').value.trim();
+  if (!topic) { alert('Please enter a topic.'); return; }
+  const platform = document.getElementById('h-platform').value;
+  const mix = document.getElementById('h-mix').value;
+  const count = document.getElementById('h-count').value;
+  const seo = document.getElementById('h-seo').value;
+
+  const btn = document.querySelector('#panel-hashtags .gen-btn');
+  btn.disabled = true; btn.textContent = 'Generating...';
+
+  const outBox = document.getElementById('out-hashtags');
+  const result = document.getElementById('res-hashtags');
+  const seoBox = document.getElementById('seo-box');
+  const seoResult = document.getElementById('res-seo');
+  outBox.style.display = 'block';
+  result.innerHTML = '<span style="font-size:13px;color:var(--muted);font-style:italic;">Generating...</span>';
+  seoBox.style.display = 'none';
+
+  const prompt = `Generate ${count} ${platform} hashtags for ${brand} (Maldives) about: ${topic}.
+Mix: ${mix}.
+${seo === 'yes' ? 'Also provide 8 SEO keyword phrases for Meta ads.' : ''}
+
+Output format:
+HASHTAGS:
+#tag1 #tag2 #tag3 ...
+${seo === 'yes' ? '\nSEO_KEYWORDS:\nkeyword1, keyword2, keyword3 ...' : ''}
+
+Only output the above format. Nothing else.`;
+
+  try {
+    const text = await callClaude(prompt);
+    const hashMatch = text.match(/HASHTAGS:\n([\s\S]*?)(?:SEO_KEYWORDS:|$)/);
+    const seoMatch = text.match(/SEO_KEYWORDS:\n([\s\S]*)/);
+
+    const hashText = hashMatch ? hashMatch[1].trim() : text.trim();
+    const tags = hashText.match(/#\w+/g) || [];
+    result.innerHTML = tags.map(t => `<span class="hashtag-pill">${t}</span>`).join('');
+
+    if (seo === 'yes' && seoMatch) {
+      const keywords = seoMatch[1].trim().split(/,\s*/).filter(Boolean);
+      seoResult.innerHTML = keywords.map(k => `<span class="hashtag-pill">${k.trim()}</span>`).join('');
+      seoBox.style.display = 'block';
+    }
+  } catch(e) {
+    if (e.message !== 'No API key') result.innerHTML = `<span style="font-size:13px;color:#e05252;">Error: ${e.message}</span>`;
+  }
+  btn.disabled = false; btn.textContent = 'Generate hashtags & keywords';
+}
+
+async function generateCampaign() {
+  const brand = getBrand('brands-campaign');
+  const occasion = document.getElementById('ca-occasion').value;
+  const duration = document.getElementById('ca-duration').value;
+  const goal = document.getElementById('ca-goal').value;
+
+  const btn = document.querySelector('#panel-campaign .gen-btn');
+  btn.disabled = true; btn.textContent = 'Planning campaign...';
+
+  const outBox = document.getElementById('out-campaign');
+  const result = document.getElementById('res-campaign');
+  outBox.style.display = 'block';
+  result.textContent = 'Building your campaign plan...';
+  result.className = 'output-text loading';
+
+  const prompt = `Create a detailed social media campaign plan for ${brand} (Maldives) for: ${occasion}.
+Duration: ${duration}.
+Brand voice: ${BRAND_VOICES[brand]}.
+${goal ? 'Campaign goal: ' + goal : ''}
+No discounts or giveaways. Focus on experience, quality, and brand story.
+
+Include:
+- Campaign theme and big idea (2-3 sentences)
+- Key messaging pillars (3 bullet points)
+- Post schedule (each post: Day X — [format] — [topic/angle])
+- 3 copy angles or hooks to explore
+
+Practical, specific, and brand-appropriate. Plain text only.`;
+
+  try {
+    const text = await callClaude(prompt);
+    result.textContent = text;
+    result.className = 'output-text';
+  } catch(e) {
+    if (e.message !== 'No API key') { result.textContent = 'Error: ' + e.message; result.className = 'output-text'; }
+  }
+  btn.disabled = false; btn.textContent = 'Generate campaign plan';
+}
+
+async function generateBrief() {
+  const brand = getBrand('brands-brief');
+  const topic = document.getElementById('b-topic').value.trim();
+  if (!topic) { alert('Please describe what the post should show.'); return; }
+  const format = document.getElementById('b-format').value;
+  const platform = document.getElementById('b-platform').value;
+  const mood = document.getElementById('b-mood').value;
+  const textOverlay = document.getElementById('b-textoverlay').value;
+
+  const btn = document.querySelector('#panel-brief .gen-btn');
+  btn.disabled = true; btn.textContent = 'Writing brief...';
+
+  const outBox = document.getElementById('out-brief');
+  const result = document.getElementById('res-brief');
+  outBox.style.display = 'block';
+  result.textContent = 'Writing design brief...';
+  result.className = 'output-text loading';
+
+  const prompt = `Write a professional design brief for a ${brand} social media post.
+
+Specs:
+- Format: ${format}
+- Platform: ${platform}
+- What to show/communicate: ${topic}
+- Visual mood: ${mood}
+- Text on image: ${textOverlay}
+
+Brief should include:
+1. Visual concept (2-3 sentences)
+2. Color palette and mood direction
+3. Photography / imagery guidance
+4. Typography & text overlay copy (if applicable)
+5. Layout composition notes
+6. Do's and don'ts
+
+Write as a clear, actionable brief a graphic designer can follow directly. Plain text only.`;
+
+  try {
+    const text = await callClaude(prompt);
+    result.textContent = text;
+    result.className = 'output-text';
+  } catch(e) {
+    if (e.message !== 'No API key') { result.textContent = 'Error: ' + e.message; result.className = 'output-text'; }
+  }
+  btn.disabled = false; btn.textContent = 'Generate design brief';
+}
+
+async function generateImagePrompts() {
+  const brand = getBrand('brands-imageprompt');
+  const subject = document.getElementById('ip-subject').value.trim();
+  if (!subject) { alert('Please describe what you want in the image.'); return; }
+  const tool = document.getElementById('ip-tool').value;
+  const purpose = document.getElementById('ip-purpose').value;
+  const style = document.getElementById('ip-style').value;
+  const ratio = document.getElementById('ip-ratio').value;
+  const count = document.getElementById('ip-count').value;
+  const lighting = document.getElementById('ip-lighting').value;
+  const includeRef = document.getElementById('ip-ref').value;
+
+  const btn = document.querySelector('#panel-imageprompt .gen-btn');
+  btn.disabled = true; btn.textContent = 'Generating prompts...';
+
+  const outBox = document.getElementById('out-imageprompt');
+  const result = document.getElementById('res-imageprompt');
+  const refSection = document.getElementById('ref-section');
+  outBox.style.display = 'block';
+  refSection.style.display = 'none';
+  result.innerHTML = '<div class="variant-card"><div class="variant-text" style="color:var(--muted);font-style:italic;">Writing your image prompts...</div></div>';
+
+  const brandVisuals = {
+    "Manhattan Fish Market": "ocean-blue and warm wood tones, fresh seafood aesthetic, casual coastal dining atmosphere, Maldives tropical setting",
+    "New York Steak Shack": "dark moody tones, charcoal and deep browns, bold meat-forward visuals, NYC steakhouse energy",
+    "Scoozi Pizzeria Italiana": "warm terracotta and cream tones, rustic Italian textures, warm candlelit ambiance, artisan food styling",
+    "Manhattan Business Hotel": "clean and sophisticated, neutral grays and warm whites, 4-star hotel aesthetic, Maldives island setting",
+    "Unique Seafood": "clean commercial photography, fresh seafood on ice or natural settings, professional B2B supplier aesthetic",
+    "Silver Catering": "elegant table settings, silver and white tones, event and banquet atmosphere, refined catering presentation"
+  };
+
+  const toolNotes = {
+    "Midjourney": "Format for Midjourney: descriptive prompt followed by --ar RATIO --style raw --v 6",
+    "DALL·E 3": "Format for DALL·E 3: natural language, detailed scene description, no special syntax needed",
+    "Adobe Firefly": "Format for Adobe Firefly: descriptive English, mention 'photo' or 'illustration', style keywords at end",
+    "Canva AI": "Format for Canva AI: short, clear descriptive sentences, mention color palette and mood",
+    "Stable Diffusion": "Format for Stable Diffusion: comma-separated descriptors, include quality boosters like (masterpiece:1.2), (photorealistic:1.1)",
+    "Generic (works anywhere)": "Format: clear descriptive prompt that works across any AI image tool"
+  };
+
+  const prompt = `You are an expert AI image prompt writer for food and hospitality brands.
+
+Brand: ${brand}
+Brand visual identity: ${brandVisuals[brand]}
+Subject/scene: ${subject}
+Purpose: ${purpose}
+Visual style: ${style}
+Lighting: ${lighting}
+Aspect ratio: ${ratio}
+Tool: ${tool}
+${toolNotes[tool]}
+
+Write ${count} distinct AI image prompt(s). Each should:
+- Be highly detailed and specific — describe subject, composition, foreground/background, lighting, colors, textures, mood, camera angle
+- Be optimized specifically for ${tool}
+- Reflect the ${brand} brand visual identity
+- Include aspect ratio ${ratio} in the correct syntax for ${tool}
+- Feel professional enough for real social media use
+
+${includeRef === 'yes' ? `After the prompts, add a section:
+REFERENCE_TERMS:
+List 8-10 short search phrases (2-5 words each) the user can search on Pinterest, Unsplash, or Google Images to find visual references. Comma separated.` : ''}
+
+Format exactly:
+PROMPT 1:
+[full prompt]
+
+PROMPT 2:
+[full prompt]
+
+${includeRef === 'yes' ? 'REFERENCE_TERMS:\nterm1, term2, term3...' : ''}
+
+Output only the prompts${includeRef === 'yes' ? ' and reference terms' : ''}, nothing else.`;
+
+  try {
+    const text = await callClaude(prompt);
+
+    const refMatch = text.match(/REFERENCE_TERMS:\n([\s\S]*)/);
+    const mainText = refMatch ? text.replace(/REFERENCE_TERMS:[\s\S]*/, '').trim() : text.trim();
+
+    const parts = mainText.split(/PROMPT \d+:/g).filter(s => s.trim());
+    if (parts.length === 0) {
+      result.innerHTML = `<div class="variant-card"><div class="variant-text">${mainText}</div></div>`;
+    } else {
+      result.innerHTML = parts.map((p, i) => `
+        <div class="variant-card">
+          <div class="variant-num">Prompt ${i + 1} — ${tool}</div>
+          <div class="variant-text" style="font-family: monospace; font-size:13px; line-height:1.7;">${p.trim()}</div>
+        </div>`).join('');
+    }
+
+    if (includeRef === 'yes' && refMatch) {
+      const terms = refMatch[1].trim().split(/,\s*/).filter(Boolean);
+      document.getElementById('res-reference-pills').innerHTML = terms.map(t => `<span class="hashtag-pill">${t.trim()}</span>`).join('');
+      document.getElementById('res-reference').textContent = terms.join(', ');
+      refSection.style.display = 'block';
+    }
+  } catch(e) {
+    if (e.message !== 'No API key') result.innerHTML = `<div class="variant-card"><div class="variant-text" style="color:#e05252;">Error: ${e.message}</div></div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Generate image prompts';
+}
+
+function copyEl(id) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.innerText || el.textContent).then(() => showCopied(id));
+}
+function copyText(id) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.textContent).then(() => showCopied(id));
+}
+function copyHashtags() {
+  const tags = Array.from(document.querySelectorAll('#res-hashtags .hashtag-pill')).map(p => p.textContent).join(' ');
+  const seoVisible = document.getElementById('seo-box').style.display !== 'none';
+  let text = tags;
+  if (seoVisible) {
+    const kw = Array.from(document.querySelectorAll('#res-seo .hashtag-pill')).map(p => p.textContent).join(', ');
+    text += '\n\nSEO Keywords: ' + kw;
+  }
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('#out-hashtags .copy-btn');
+    const orig = btn.textContent; btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+function showCopied(id) {
+  const box = document.getElementById(id).closest('.output-box');
+  if (!box) return;
+  const btn = box.querySelector('.copy-btn');
+  const orig = btn.textContent; btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = orig, 1500);
+}
+</script>
+</body>
+</html>
